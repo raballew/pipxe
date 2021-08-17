@@ -88,9 +88,7 @@ jobs:
           path: container.tar
 name: Build
 on:
-  pull_request:
-    branches:
-      - main
+  pull_request: null
   push:
     branches:
       - main
