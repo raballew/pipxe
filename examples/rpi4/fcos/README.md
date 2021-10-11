@@ -32,11 +32,7 @@ Where:
 
 ## Customize
 
-Then check that [fake-cpuinfo](fake-cpuinfo) content is equal to your devices
-specifications for `Revision` that is usually stored in `/proc/cpuinfo` when
-using Raspbian.
-
-Now render the ignition file:
+Render the ignition file:
 
 ```bash
 podman run --pull=always --rm -v ${PWD}:/data:z -w /data quay.io/coreos/butane:release --pretty --strict -d /data/ fcos.bu > fcos.ign
