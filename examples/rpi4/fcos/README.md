@@ -1,7 +1,5 @@
 # Fedora CoreOS
 
-## Download
-
 First, navigate to this directory and download the latest stable `aarch64`
 version of Fedora CoreOS.
 
