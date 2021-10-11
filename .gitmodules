@@ -10,3 +10,9 @@
 [submodule "ipxe"]
 	path = ipxe
 	url = https://github.com/ipxe/ipxe.git
+[submodule "examples/rpi4/fcos/fedora-coreos-config"]
+	path = examples/rpi4/fcos/fedora-coreos-config
+	url = https://github.com/raballew/fedora-coreos-config.git
+[submodule "examples/rpi4/fcos/coreos-assembler"]
+	path = examples/rpi4/fcos/coreos-assembler
+	url = https://github.com/raballew/coreos-assembler.git

@@ -1,7 +1,11 @@
 # Fedora CoreOS
 
+## Download
+
 First, navigate to this directory and download the latest stable `aarch64`
 version of Fedora CoreOS.
+
+## Official release
 
 ```bash
 podman run --pull=always --rm -v ${PWD}:/data -w /data quay.io/coreos/coreos-installer:release download -f pxe --architecture aarch64
@@ -12,6 +16,21 @@ mv fedora-coreos-*-live-kernel-aarch64 fedora-coreos-live-kernel-aarch64.gz
 # piPXE uses EFI which only supports uncompressed kernel artifacts
 gzip -d fedora-coreos-live-kernel-aarch64.gz
 ```
+
+## Custom build
+
+Download the disk image using [oras]:
+
+```bash
+podman run -it --rm -v $(pwd):/workspace:Z ghcr.io/oras-project/oras:v0.12.0 pull ghcr.io/raballew/pipxe/fcos:${GIT_REVISION} -a
+```
+
+Where:
+
+* `${GIT_REVISION}` -  Full `SHA-1 object name` from main branch, [SemVer]
+  compliant `tag` or `latest`
+
+## Customize
 
 Then check that [fake-cpuinfo](fake-cpuinfo) content is equal to your devices
 specifications for `Revision` that is usually stored in `/proc/cpuinfo` when
@@ -31,3 +50,5 @@ to all artifacts.
 
 Then follow the steps described [here](../../../README.md#use) and finally power
 on your Raspberry Pi.
+
+[oras]: https://github.com/oras-project/oras
