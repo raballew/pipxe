@@ -153,5 +153,4 @@ licensing terms for more details:
 [SemVer]: https://semver.org/
 [Firmware]: https://github.com/raspberrypi/firmware/tree/master/boot
 [EDK2]: https://github.com/tianocore/edk2
-[RPi]:
-    https://github.com/tianocore/edk2-platforms/tree/master/Platform/RaspberryPi/
+[RPi]: https://github.com/tianocore/edk2-platforms/tree/master/Platform/RaspberryPi/
