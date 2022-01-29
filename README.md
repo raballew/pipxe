@@ -49,6 +49,34 @@ Where:
   compliant `tag` or `latest`
 
 You should now see a bunch of `*.img` files in your current working directory.
+
+### PXE Chainloading
+
+This configuration only works with Raspberry Pi 4's. In the EEPROM adjust the
+[BOOT_ORDER
+configuration](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-4-bootloader-configuration)
+in the bootloader to include PXE booting from the network. Shut down your
+Raspberry Pi.
+
+Then mount the previously downloaded `RPi4.img` into your .
+
+```bash
+mkdir -p $TFTP_ROOT_DIR
+mount -v -o offset=16384 RPi4.img $TFTP_ROOT_DIR
+```
+
+Where:
+
+* `$TFTP_ROOT_DIR` - The TFTP server directory.
+
+Then setup your DHCP server to let the Raspberry Pi perform its standard network
+boot with the aforementioned TFTP server. The device will identify itself with
+vendor class `PXEClient:Arch:00000:UNDI:002001`. You need to set the boot file
+to the built iPXE EFI firmware. This should be located at
+`$TFTP_ROOT_DIR/efi/boot/bootaa64.efi`. Power on your Raspberry Pi.
+
+### SD Card
+
 Select the appropriate one for your hardware and write it onto any blank micro
 SD card. Then insert the micro SD card into your Raspberry Pi and power it on.
 Within a few seconds you should see iPXE appear and begin booting from the
@@ -86,9 +114,9 @@ themselves with the code of conduct and to follow these standards in all
 piPXE-affiliated environments, which includes but is not limited to
 repositories, chats, and meetup events.
 
-## Licence
+## License
 
-Every component is under an open source licence. See the individual subproject
+Every component is under an open source license. See the individual subproject
 licensing terms for more details:
 
 * <https://github.com/raspberrypi/firmware/blob/master/boot/LICENCE.broadcom>
@@ -101,4 +129,5 @@ licensing terms for more details:
 [SemVer]: https://semver.org/
 [Firmware]: https://github.com/raspberrypi/firmware/tree/master/boot
 [EDK2]: https://github.com/tianocore/edk2
-[RPi]: https://github.com/tianocore/edk2-platforms/tree/master/Platform/RaspberryPi/
+[RPi]:
+    https://github.com/tianocore/edk2-platforms/tree/master/Platform/RaspberryPi/
