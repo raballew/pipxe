@@ -1,6 +1,6 @@
 RASPI_VERSION	= RPi4
 
-FW_URL			:= https://github.com/raspberrypi/firmware/branches/stable/boot
+FW_URL			:= https://github.com/raspberrypi/firmware.git
 SHELL			:= /bin/bash
 EFI_BUILD		:= RELEASE
 EFI_ARCH		:= AARCH64
@@ -29,8 +29,12 @@ patches :
 firmware :
 	if [ ! -e firmware ] ; then \
 		$(RM) -rf firmware-tmp ; \
-		svn export $(FW_URL) firmware-tmp && \
-		mv firmware-tmp firmware ; \
+		git clone --branch stable --filter=blob:none --no-checkout $(FW_URL) firmware-tmp && \
+		cd firmware-tmp && \
+		git sparse-checkout init && \
+		git sparse-checkout set /boot && \
+		git checkout && \
+		mv boot ../firmware ; \
 	fi
 
 efi : $(EFI_FD)

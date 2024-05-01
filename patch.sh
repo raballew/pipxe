@@ -7,7 +7,10 @@ target="$1"
 echo "Patching target: ${target}"
 
 # Enable GZIP image support
-sed -i 's/\/\/#define.*IMAGE_GZIP.*/#define IMAGE_GZIP/' ipxe/src/config/general.h
+sed -i -e 's|^//#define\s\+IMAGE_GZIP.*$|#define IMAGE_GZIP|' \
+  -e 's|^//#define\s\+NTP_CMD.*$|#define NTP_CMD|' \
+  -e 's|^#undef\s\+DOWNLOAD_PROTO_HTTPS.*$|#define DOWNLOAD_PROTO_HTTPS|' \
+  ipxe/src/config/general.h
 
 case $target in
 
